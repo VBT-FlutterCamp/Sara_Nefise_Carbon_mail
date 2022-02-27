@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
-
 import 'package:carbon_mail/feature/homepage/service/PostSevrice.dart';
-
 import '../../products/text/HomePageText.dart';
 import '../../products/color/Appcolors.dart';
 import 'model/post.dart';
@@ -38,77 +36,57 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(8),
-        constraints: const BoxConstraints.expand(),
-        decoration: BoxDecoration(
-            color: AppColors().dark_grey_blue,
-            border: Border.all(color: Theme.of(context).colorScheme.secondary)),
-        child: Column(
-          children: [
-            const Spacer(
-              flex: 1,
-            ),
-            Expanded(
-              flex: 2,
-              // ignore: prefer_const_constructors
-              child: Text(
-                HomePagetext().keepUptitle,
-                style: context.textTheme.headline3,
-                textAlign: TextAlign.left,
+        body: Container(
+          padding: EdgeInsets.all(8),
+          constraints: const BoxConstraints.expand(),
+          decoration: BoxDecoration(
+              color: AppColors().dark_grey_blue,
+              border:
+                  Border.all(color: Theme.of(context).colorScheme.secondary)),
+          child: Column(
+            children: [
+              const Spacer(
+                flex: 1,
               ),
-            ),
-            Expanded(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(HomePagetext().subscrubionTitle,
-                    style: context.textTheme.bodyLarge,
-                    textAlign: TextAlign.left),
-                Opacity(
-                  opacity: 0.3,
-                  child: Container(
+              Expanded(
+                flex: 2,
+                child: Text(
+                  HomePagetext().keepUptitle,
+                  style: TextStyle(color: AppColors().white, fontSize: 40),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              Expanded(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(HomePagetext().subscrubionTitle,
+                      style: TextStyle(
+                          color: AppColors().white,
+                          fontWeight: FontWeight.w400),
+                      textAlign: TextAlign.left),
+                  Container(
                     padding: const EdgeInsets.all(10),
-                    decoration:  BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                      color: AppColors().white,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                      color: AppColors().grey_blue,
                     ),
                     child: Text(HomePagetext().cleandtitle,
-                        style: context.textTheme.bodyLarge,
+                        style: TextStyle(
+                            color: AppColors().white,
+                            fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center),
                   ),
-                )
-              ],
-            )),
-            Expanded(
-              flex: 8,
-              child: Container(child: _listViewBuilder()),
-            ),
-          ],
+                ],
+              )),
+              Expanded(
+                flex: 8,
+                child: Container(child: _listViewBuilder()),
+              ),
+            ],
+          ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.folder),
-            label: HomePagetext().folderIcon,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.settings),
-            label: HomePagetext().settingsIcon,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.line_style),
-            label: HomePagetext().lineIcon,
-          ),
-        ],
-        //currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        // onTap: _onItemTapped,
-      ),
-    );
+        bottomNavigationBar: _buttomNavigation());
   }
 
   Widget _listViewBuilder() {
@@ -129,15 +107,14 @@ class _HomePageState extends State<HomePage> {
                       onPressed: () {},
                       child: const Icon(Icons.delete),
                       style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                             AppColors().grey_blue),
+                          backgroundColor:
+                              MaterialStateProperty.all(AppColors().grey_blue),
                           foregroundColor:
                               MaterialStateProperty.all(AppColors().blue),
-                          shape:
-                              MaterialStateProperty.all<OutlinedBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      ))),
+                          shape: MaterialStateProperty.all<OutlinedBorder>(
+                              RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                          ))),
                     ),
                   ),
                   title: Text(
@@ -156,5 +133,29 @@ class _HomePageState extends State<HomePage> {
             },
           )
         : const Center(child: CircularProgressIndicator());
+  }
+
+  BottomNavigationBar _buttomNavigation() {
+    return BottomNavigationBar(
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.folder),
+          label: HomePagetext().folderIcon,
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.settings),
+          label: HomePagetext().settingsIcon,
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.line_style),
+          label: HomePagetext().lineIcon,
+        ),
+      ],
+      //currentIndex: _selectedIndex,
+      selectedItemColor: Colors.amber[800],
+      // onTap: _onItemTapped,
+    );
   }
 }
